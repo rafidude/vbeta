@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>SVG Example</title>
+	<style>
+		.pt {
+			fill: red;
+		}
+	</style>
+</head>
+
+<body>
+
+	<svg width="250" height="250">
+
+		<line x1="10" y1="0" x2="10" y2="200" stroke="black" />
+		<line x1="10" y1="200" x2="200" y2="200" stroke="black" />
+		<line x1="10" y1="0" x2="200" y2="0" stroke="black" />
+		<line x1="200" y1="0" x2="200" y2="200" stroke="black" />
+
+		<g transform="translate(50, 10)">
+			<circle cx="0" cy="0" r="10" />
+			<circle cx="100" cy="100" r="10" />
+			<circle cx="130" cy="120" r="10" />
+			<circle cx="80" cy="180" r="10" />
+			<circle class="pt" cx="180" cy="80" r="10" />
+			<circle class="pt" cx="180" cy="40" r="10" />
+		</g>
+	</svg>
+
+</body>
+
+</html>
