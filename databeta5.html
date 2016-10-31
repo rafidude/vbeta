@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>D3 Example</title>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js"></script>
+	<style>
+		.svg {
+			background-color: AliceBlue;
+		}
+	</style>
+</head>
+
+<body>
+  <div id="income"></div>
+  <div id="expense"></div>
+	<script>
+    var xc = 0;
+    var prevy = -99999;
+      
+    var outerWidth  = 600;
+    var outerHeight = 200;
+
+    var margin = { left: 70, top: 30, right: 30, bottom: 30 };
+    var innerWidth  = outerWidth  - margin.left - margin.right;
+    var innerHeight = outerHeight - margin.top  - margin.bottom;
+
+    var xcoord = function (d){ 
+        if (prevy != d.y) {
+            prevy = d.y;
+            xc = 0;
+        }
+        x = xc;
+        xc += scale(d.w) + 5; 
+        return x; 
+      }
+
+    var data = [{x:1, y:50, w:4560, c:'1'}, 
+                  {x:2, y:50, w:1000, c:'2'},
+                  {x:1, y:100, w:2500, c:'3'}, 
+                  {x:2, y:100, w:800, c:'3'}, 
+                  {x:3, y:100, w:800, c:'3'}];
+
+    var scale = d3.scaleLinear()
+        .domain([0, 5000])   // Data space
+        .range([0, 400]); // Pixel space
+    var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    
+    var svg = d3.select("#income").append("svg")
+        .attr("width",  outerWidth)
+        .attr("height", outerHeight)
+        .attr("class", "svg");
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      g.selectAll("rect")
+          .data(data)
+        .enter().append("rect")
+          .attr("x", xcoord)
+          .attr("y", function (d){return d.y})
+          .attr("width",  function(d){ return scale(d.w)})
+          .attr("height", 35)
+          .attr("fill", function (d){ return colorScale(d['c']); })
+
+    var sumW = d3.sum(data, function(d) { return d['w']; });
+    var xScale = d3.scaleLinear()
+            .domain([0, sumW])
+            .range([margin.left, innerWidth]);
+
+    svg.append("g")
+          .attr("transform", "translate(0," + (outerHeight - margin.bottom) + ")")
+          .call(d3.axisBottom(xScale).ticks(5));	
+    
+    svg.append("text")
+        .text("Expenses")
+        .attr("x", 0)
+        .attr("y", 100);
+    
+    svg.append("text")
+        .text("Income")
+        .attr("x", 0)
+        .attr("y", 150);
+    
+    startY = outerHeight - margin.bottom;
+    endY = margin.top;
+    svg.append("line")
+        .attr("x1", margin.left)
+        .attr("y1", startY)
+        .attr("x2", margin.left)
+        .attr("y2", endY)
+        .attr("stroke-width", 1)
+        .attr("stroke", "black");
+
+    </script>
+</body>
+
+</html>

@@ -13,7 +13,7 @@
 }
 
 .area {
-  fill: steelblue;
+  fill: #d9d9d9;
 }
 </style>
 <svg width="960" height="500"></svg>
@@ -28,11 +28,12 @@ var balancesData = (initialBalance, startingYear, endingYear) => {
     };
     
     var balance = initialBalance, withdrawal = 0;
+    var bottomMargin = 20;
 
     var y25 = x.map( function(v, i){
         withdrawal = Math.random()*delta;
         balance = balance - withdrawal;
-        if (balance < 0) balance = 0;
+        if (balance < bottomMargin) balance = bottomMargin;
         return balance;
     });
 
@@ -40,7 +41,7 @@ var balancesData = (initialBalance, startingYear, endingYear) => {
     var y50 = x.map( function(v, i){
         withdrawal = 2*Math.random()*delta;
         balance = balance - withdrawal;
-        if (balance < 0) balance = 0;
+        if (balance < bottomMargin) balance = bottomMargin;
         return balance;
     });
 
@@ -48,7 +49,7 @@ var balancesData = (initialBalance, startingYear, endingYear) => {
     var y75 = x.map( function(v, i){
         withdrawal = 3*Math.random()*delta;
         balance = balance - withdrawal;
-        if (balance < 0) balance = 0;
+        if (balance < bottomMargin) balance = bottomMargin;
         return balance;
     });
 
@@ -63,58 +64,64 @@ var balancesData = (initialBalance, startingYear, endingYear) => {
     return data;
 }
 
-var data = balancesData(102, 65, 90);
+//var balanceQuantiles = [[1,2,3], [3,4,5], [5,6,], [7,8], [9,10]];
+//var data = {};
+//data.y25 = balanceQuantiles[1];
+//data.y50 = balanceQuantiles[2];
+//data.y75 = balanceQuantiles[3];
+
+var aus = {};
+aus.startAge = 65;
+aus.endAge = 90;
+aus.startingBalance = 102; 
+
+var data = balancesData(aus.startingBalance, aus.startAge, aus.endAge);
 
 var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var x = d3.scaleLinear()
+var xScale = d3.scaleLinear()
     .rangeRound([0, width]);
 
-var y = d3.scaleLinear()
+var yScale = d3.scaleLinear()
     .rangeRound([height, 0]);
 
 var line25 = d3.line()
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y25); });
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y25); });
 
 var line50 = d3.line()
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y50); });
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y50); });
 
 var line75 = d3.line()
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y75); });
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y75); });
 
 var area = d3.area()
-    .x(function(d) { return x(d.x); })
-    .y1(function(d) { return y(d.y25); })
-    .y0(function(d) { return y(d.y75); });
+    .x(function(d) { return xScale(d.x); })
+    .y1(function(d) { return yScale(d.y25); })
+    .y0(function(d) { return yScale(d.y75); });
 
-  x.domain(d3.extent(data, function(d) { return d.x; }));
-  y.domain(d3.extent(data, function(d) { return d.y50; }));
+  xScale.domain(d3.extent(data, function(d) { return d.x; }));
+  yScale.domain(d3.extent(data, function(d) { return d.y50; }));
 
   g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(xScale));
 
   g.append("g")
       .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(yScale));
 
   g.append("path")
       .datum(data)
       .attr("class", "line")
       .attr("d", line25);
-
-  g.append("path")
-      .datum(data)
-      .attr("class", "line")
-      .attr("d", line50);
 
   g.append("path")
       .datum(data)
@@ -125,4 +132,10 @@ var area = d3.area()
       .datum(data)
       .attr("class", "area")
       .attr("d", area);
+
+  g.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", line50);
+
 </script>

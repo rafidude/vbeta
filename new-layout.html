@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AssetBuilder Retirment Income</title>
+	
+	
+	<!-- Load Up Typekit  [Loads Typefaces for Project ]-->
+	<script src="https://use.typekit.net/dpw6kvr.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+	<!-- Material Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- AssetBuilder Framework -->
+	<link rel="stylesheet" href="./app.min.css">
+</head>
+
+<body class="">
+	<!-- Modal Pop Up - Add m-modal-open to body class attribute to pop modal -->
+	<div class="m-modal">
+		<div class="m-modal__background"></div>
+		<div class="m-modal__body">
+				<section class="m-modal__body__title">
+					<h3>Modal Title</h3>
+				</section>
+				<section class="m-modal__body__message">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum sequi, quos veritatis. Illum aspernatur iure debitis, natus, ea, odit ab totam dolorum molestiae vitae ullam iste consequuntur magni ipsam, a nulla culpa reiciendis quo facilis voluptates maxime dolores. Fugiat in eveniet aliquid officiis error saepe, accusantium quis deserunt dolorem illum! </p>
+				</section>
+				
+				<section class="m-modal-body__action">
+					<div class="button small"> <a ng-click="alert.close()">Close</a> </div>
+				</section>
+		</div>
+	</div>
+
+	<!--AB Flash  Add  open to pop the flash with animation and add info, succes, error, or warning to change color of flash for approriate message -->
+	<div class="m-flash">
+		<div class="m-flash__wrapper">
+			<a class="m-flash__close" href="{{ close }}">&times;</a>
+			
+			<div class="m-flash__heading">
+				<p>An Error Has Been Detected</p>
+			</div>
+			
+			<div class="m-flash__action">
+				<button>Alert Action</button>
+			</div>
+
+		</div>
+	</div>
+
+	<header class="retirement__header">	
+		<nav>
+			<a href=""><i class="material-icons">menu</i></a>
+			<span>Your Income</span>
+		</nav>
+	</header>
+
+	<!-- Changing the Class from Green, Yellow,  Red will change all element color with the class "canChange" -->
+	<main class="retirement-income green">
+		 
+
+		 <!-- Monthly Numbers -->
+		<div class="retirement-income__main-stats row l-section">
+			<section>
+				<p class="t-retirement__stat--subHead">Targeted Monthly Income</p>
+				<h2 class="canChange t-retirement__stat">$7,080</h2>
+				<p class="t-retirement__stat--helper">Annually $84,960</p>
+			</section>
+			<section>
+				<p class="t-retirement__stat--subHead">Healthy Retirment Index</p>
+				<h2 class="canChange t-retirement__stat">120</h2>
+			</section>
+			<section>
+				<p class="t-retirement__stat--subHead">Age of Survival</p>
+				<h2 class="canChange t-retirement__stat">87</h2>
+				<p class="t-retirement__stat--helper"><modal href="#" >How do we calculate this?</a></p>
+			</section>
+		</div>
+
+		<!-- Monthly Income Chart -->
+		<div class="retirement-income__monthly row l-section">
+			<h3 class="t-retirement__section-header">Monthly Income</h3>
+			<img src="/month-income-chart.png"  alt="Month Income Chart"/> 
+		</div>
+
+		<!-- Expense Module Charts -->
+		<div class="retirement-income__expense row l-section">
+			<nav class="retirement-income__edit row">
+				<div>
+					<h3 class="t-retirement__section-header">Your Expenses</h3>
+				</div>
+				<div>
+					<a href=""><i class="material-icons">mode_edit</i> Change</a>
+				</div>
+			</nav>
+
+			<img src="/expense-chart.png"  alt="Month Income Chart"/> 		
+			
+			<!-- 
+			`	<section>
+					<title>	
+						<h4>$5,580</h4>
+						<h5>requireed Expenses</h5>
+					</title>
+					<expense-chart></expense-chart>
+				</section>
+				<section>
+					<title>	
+						<h4>$1,500</h4>
+						<h5>desired Expenses</h5>
+					</title>
+					<expense-chart></expense-chart>
+				</section>
+				<section>
+					<title>	
+						<h4>$7,080</h4>
+						<h5>Income</h5>
+					</title>
+					<expense-chart></expense-chart>
+				</section>
+			-->
+		</div>
+		
+		<!-- Portfolio  Spenddown Chart -->
+		<div class="retirement-income__spend-down row l-section">
+			<h3 class="t-retirement__section-header">
+				Your Portfolio
+				<small>We expect your portfolio to outlive you to the age of 95.</small>
+			</h3>
+			<img src="/spend-down-graph.png"  alt="Spend Down Chart"/> 
+		</div>
+
+		<!-- Tips  ONLY show ion yellow and Red-->
+		<div class="retirement-income__tips row l-section">
+			<h3 class="t-retirement__section-header">Tip to get back on track</h3>
+			<div>
+				<i class="material-icons">home</i>
+				<section>
+					<h4>You can Reduce Your Housing Expenses</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam numquam excepturi dolor iste ea illum temporibus nihil, voluptas totam autem voluptatem reiciendis necessitatibus pariatur, eaque consectetur doloremque quia explicabo. Itaque accusantium rerum voluptate voluptates ab provident beatae veniam alias, nisi ut labore consequatur praesentium corrupti officiis iure nulla. A, totam.</p>
+				</section>
+			</div>
+			<div>
+				<i class="material-icons">movie_filter</i>
+				<section>
+					<h4>You Can Reduce Your Entertainment Expenses</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam numquam excepturi dolor iste ea illum temporibus nihil, voluptas totam autem voluptatem reiciendis necessitatibus pariatur, eaque consectetur doloremque quia explicabo. Itaque accusantium rerum voluptate voluptates ab provident beatae veniam alias, nisi ut labore consequatur praesentium corrupti officiis iure nulla. A, totam.</p>
+				</section>
+			</div>
+			<div>
+				<i class="material-icons">money_off</i>
+				<section>
+					<h4>Optimize Your Social Security</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam numquam excepturi dolor iste ea illum temporibus nihil, voluptas totam autem voluptatem reiciendis necessitatibus pariatur, eaque consectetur doloremque quia explicabo. Itaque accusantium rerum voluptate voluptates ab provident beatae veniam alias, nisi ut labore consequatur praesentium corrupti officiis iure nulla. A, totam.</p>
+				</section>
+			</div>
+			<div>
+				<i class="material-icons">attach_money</i>
+				<section>
+					<h4>Get a Part Time Job</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam numquam excepturi dolor iste ea illum temporibus nihil, voluptas totam autem voluptatem reiciendis necessitatibus pariatur, eaque consectetur doloremque quia explicabo. Itaque accusantium rerum voluptate voluptates ab provident beatae veniam alias, nisi ut labore consequatur praesentium corrupti officiis iure nulla. A, totam.</p>
+				</section>
+			</div>
+		</div>
+
+
+	</main>
+
+	<footer class="row l-section">
+		<p class="legal">&copy; AssetBuilder Inc 2016 All Rights Reserved </p>
+	</footer>
+</body>
+</html>
