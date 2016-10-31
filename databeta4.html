@@ -13,7 +13,8 @@
 </head>
 
 <body>
-
+  <div id="income"></div>
+  <div id="expense"></div>
 	<script>
     var xc = 0;
     var prevy = -99999;
@@ -39,14 +40,14 @@
                   {x:2, y:50, w:1000, c:'2'},
                   {x:1, y:100, w:2500, c:'3'}, 
                   {x:2, y:100, w:800, c:'3'}, 
-                  {x:3, y:100, w:800, c:'3'},];
+                  {x:3, y:100, w:800, c:'3'}];
 
       var scale = d3.scaleLinear()
         .domain([0, 5000])   // Data space
         .range([0, 400]); // Pixel space
     var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
     
-      var svg = d3.select("body").append("svg")
+      var svg = d3.select("#income").append("svg")
         .attr("width",  outerWidth)
         .attr("height", outerHeight)
         .attr("class", "svg");
@@ -64,7 +65,6 @@ var g = svg.append("g")
           .attr("fill", function (d){ return colorScale(d['c']); })
 
         var sumW = d3.sum(data, function(d) { return d['w']; });
-    console.log('sumW', sumW);
     padding = 30;
     var xScale = d3.scaleLinear()
             .domain([0, sumW])
